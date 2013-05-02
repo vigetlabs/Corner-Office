@@ -59,6 +59,7 @@ end
 group :test do
   gem "capybara"
   gem "shoulda-matchers"
+  gem "factory_girl"
   gem "launchy", :require => false
 end
 

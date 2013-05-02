@@ -1,5 +1,8 @@
-~* CornerOffice *~
+~* Corner Office *~
 
+A Highrise-integrated deal forecaster and visualizer
+
+[See Prototype Demo](http://corner-office.herokuapp.com/deals)
 
 Install
 =======

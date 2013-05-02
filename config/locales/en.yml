@@ -2,4 +2,17 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  user:
+    create:
+      success: "Account created"
+      error: "There were errors creating the account"
+    update:
+      success: "Account updated"
+      error: "There were errors updating the account"
+  session:
+    required: "Authentication required"
+    create:
+      success: "You have been logged in"
+      error: "Invalid email/password combination"
+    destroy:
+      success: "You have been logged out"

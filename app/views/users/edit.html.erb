@@ -3,3 +3,5 @@
   <%= render "form_fields", :f => f %>
   <%= f.button :submit, :value => "Submit" %>
 <% end %>
+
+<%= link_to "Link Your Highrise Account", new_token_path, :id => "authorize_highrise" %>

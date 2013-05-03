@@ -34,4 +34,10 @@ CornerOffice::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  default_url_options[:host] = "corner-office.dev"
+end
+
+module CornerOffice
+  HIGHRISE_CONFIG = YAML.load_file(Rails.root.join('config','highrise.yml'))[Rails.env]
 end

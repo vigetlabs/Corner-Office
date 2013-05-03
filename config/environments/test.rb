@@ -34,4 +34,10 @@ CornerOffice::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  default_url_options[:host] = "localhost:3000"
+end
+
+module CornerOffice
+  HIGHRISE_CONFIG = YAML.load_file(Rails.root.join('config','highrise.yml'))[Rails.env]
 end

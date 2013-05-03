@@ -31,5 +31,11 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
+  config.include UserLoginController, :type => :controller
   config.include UserLoginFeature, :type => :feature
+end
+
+VCR.configure do |c|
+  c.hook_into :webmock
+  c.cassette_library_dir = 'spec/fixtures/cassettes'
 end

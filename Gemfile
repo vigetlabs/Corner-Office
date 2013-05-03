@@ -38,6 +38,9 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem "airbrake"
+gem "simplest_auth"
+gem "simple_form"
+
 group :assets do
   gem "compass-rails"
 end

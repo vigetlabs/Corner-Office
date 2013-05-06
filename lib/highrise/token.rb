@@ -17,7 +17,7 @@ module Highrise
       )
     end
 
-    def secret
+    def to_s
       @token.token
     end
 

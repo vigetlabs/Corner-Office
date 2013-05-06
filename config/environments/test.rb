@@ -37,7 +37,3 @@ CornerOffice::Application.configure do
 
   default_url_options[:host] = "localhost:3000"
 end
-
-module CornerOffice
-  HIGHRISE_CONFIG = YAML.load_file(Rails.root.join('config','highrise.yml'))[Rails.env]
-end

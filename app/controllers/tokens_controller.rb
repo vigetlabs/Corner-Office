@@ -17,7 +17,7 @@ class TokensController < ApplicationController
   private
 
   def new_token_from_auth_code
-    current_user.tokens.create_from_auth_code(auth_code)
+    current_user.tokens.new_from_auth_code(auth_code)
   end
 
   def auth_code

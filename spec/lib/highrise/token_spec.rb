@@ -25,7 +25,7 @@ describe Highrise::Token do
     end
   end
 
-  describe "#secret" do
+  describe "#to_s" do
     let(:token){ double }
     before do
       web_server.stub(:get_token){ token }
@@ -33,7 +33,7 @@ describe Highrise::Token do
     end
 
     it "returns the token string" do
-      described_class.new("auth_code").secret.should == "secret"
+      described_class.new("auth_code").to_s.should == "secret"
     end
   end
 end

@@ -67,14 +67,3 @@ CornerOffice::Application.configure do
 
   default_url_options[:host] = "corner-office.herokuapp.com"
 end
-
-module CornerOffice
-  # ENV-based config for Heroku
-  HIGHRISE_CONFIG = {
-    "site"     => ENV['HIGHRISE_SITE'],
-    "client_id" => ENV['HIGHRISE_CLIENT_ID'],
-    "client_secret" => ENV['HIGHRISE_CLIENT_SECRET'],
-    "authorize_url" => ENV['HIGHRISE_AUTHORIZE_URL'],
-    "token_url"     => ENV['HIGHRISE_TOKEN_URL'],
-  }
-end

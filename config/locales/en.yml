@@ -16,3 +16,7 @@ en:
       error: "Invalid email/password combination"
     destroy:
       success: "You have been logged out"
+  token:
+    create:
+      success: "Your account has been connected to Highrise"
+      error: "There was an error connecting your Highrise account"

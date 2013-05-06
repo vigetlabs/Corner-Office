@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem "airbrake"
 gem "simplest_auth"
 gem "simple_form"
+gem "oauth2"
 
 group :assets do
   gem "compass-rails"
@@ -51,6 +52,7 @@ group :test, :development do
   gem "factory_girl_rails"
   gem "simplecov", :require => false
   gem "awesome_print"
+  gem "pry-remote"
 end
 
 group :development do
@@ -64,6 +66,8 @@ group :test do
   gem "shoulda-matchers"
   gem "factory_girl"
   gem "launchy", :require => false
+  gem "vcr"
+  gem "webmock"
 end
 
 gem "nokogiri"

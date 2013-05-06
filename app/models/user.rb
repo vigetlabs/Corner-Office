@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   authenticate_by :email
 
+  has_many :tokens
+
   attr_accessible :password, :password_confirmation, :email, :first_name, :last_name
 
   validates :first_name, :last_name, :email, :presence => true

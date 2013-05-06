@@ -16,6 +16,10 @@ describe User do
     it { should allow_value("justright").for(:password) }
   end
 
+  describe "associations" do
+    it { should have_many(:tokens) }
+  end
+
   describe "#name" do
     let(:user){ create(:user, :first_name => "Marie", :last_name => "Curie") }
 

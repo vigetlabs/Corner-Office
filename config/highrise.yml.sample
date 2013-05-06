@@ -1,0 +1,20 @@
+development:
+  site: https://subdomain.highrisehq.com/
+  client_id: Client ID
+  client_secret: Client Secret
+  authorize_url: /authorization/new
+  token_url: /authorization/token
+
+test:
+  site: https://subdomain.highrisehq.com/
+  client_id: Client ID
+  client_secret: Client Secret
+  authorize_url: /authorization/new
+  token_url: /authorization/token
+
+production:
+  site: https://subdomain.highrisehq.com/
+  client_id: Client ID
+  client_secret: Client Secret
+  authorize_url: /authorization/new
+  token_url: /authorization/token

@@ -20,3 +20,8 @@ en:
     create:
       success: "Your account has been connected to Highrise"
       error: "There was an error connecting your Highrise account"
+    required: "You must authorize your Highrise account to view this page"
+  deal:
+    update:
+      success: "Deal updated"
+      error: "There were errors updating the deal"

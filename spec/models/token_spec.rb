@@ -25,5 +25,19 @@ describe Token do
     it "returns an instance of Token" do
       described_class.new_from_auth_code("auth_code").should be_a(Token)
     end
+
+    context "if an oauth error occurs" do
+      let(:error_response){ double }
+      before do
+        error_response.stub(:error=){ nil }
+        error_response.stub(:parsed){ nil }
+        error_response.stub(:body){ nil }
+        Highrise::Token.stub(:new).and_raise(OAuth2::Error.new(error_response))
+      end
+
+      it "returns a token with a blank secret" do
+        described_class.new_from_auth_code("auth_code").secret.should be_blank
+      end
+    end
   end
 end

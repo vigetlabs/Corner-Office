@@ -7,6 +7,9 @@ CornerOffice::Application.routes.draw do
 
   resource :session, :only => [:new, :create, :destroy]
   resource :token, :only => [:new]
+  resources :deals, :only => [:show, :edit, :update]
+
+  root :to => "deals#index"
 
   # need this because Rails `rescue_from` doesn't catch ActionController::RoutingError
   unless Rails.env.development?

@@ -41,6 +41,7 @@ gem "airbrake"
 gem "simplest_auth"
 gem "simple_form"
 gem "oauth2"
+gem "highrise"
 
 group :assets do
   gem "compass-rails"

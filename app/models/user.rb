@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 
   authenticate_by :email
 
-  has_many :tokens
+  has_many :tokens, :order => "created_at DESC"
 
   attr_accessible :password, :password_confirmation, :email, :first_name, :last_name
 
@@ -17,5 +17,9 @@ class User < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def token
+    tokens.first
   end
 end

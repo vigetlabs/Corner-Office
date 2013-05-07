@@ -1,0 +1,8 @@
+<h2>Deals</h2>
+<% if @deals.any? %>
+  <ul>
+    <% @deals.each do |deal| %>
+      <li><%= link_to deal.name, deal_path(deal) %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,8 +1,9 @@
 class DealsController < ApplicationController
+  helper_method :deal
+
   before_filter :require_authentication
   before_filter :require_oauth_token
   before_filter :set_oauth_token
-  before_filter :load_deal, :only => [:show, :edit, :update]
 
   def index
     @deals = Deal.find(:all)
@@ -15,8 +16,8 @@ class DealsController < ApplicationController
   end
 
   def update
-    if @deal.update_deal_data(params[:deal])
-      redirect_to deal_path(@deal), :notice => t("deal.update.success")
+    if deal.update_deal_data(params[:deal])
+      redirect_to deal_path(deal), :notice => t("deal.update.success")
     else
       flash.now[:error] = t("deal.update.error")
       render "edit"
@@ -35,7 +36,7 @@ class DealsController < ApplicationController
     Highrise::Base.oauth_token = current_user.token.secret
   end
 
-  def load_deal
+  def deal
     @deal ||= Deal.find(params[:id])
   end
 end

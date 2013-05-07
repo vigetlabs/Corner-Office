@@ -1,7 +1,7 @@
 <%= link_to "Back to Deals", root_path %>
-<h1>Editing <%= @deal.name %></h1>
-<%= simple_form_for @deal do |f| %>
-  <%= f.simple_fields_for @deal.deal_data do |dd| %>
+<h1>Editing <%= deal.name %></h1>
+<%= simple_form_for deal do |f| %>
+  <%= f.simple_fields_for deal.deal_data do |dd| %>
     <%= dd.input :start_date, :as => :date %>
     <%= dd.input :end_date, :as => :date %>
     <%= dd.input :probability, :label => "Win Probability" %>

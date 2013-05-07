@@ -15,7 +15,6 @@ class Deal < Highrise::Deal
   private
 
   def find_or_build_deal_data
-    DealData.find(:first, :conditions => { :deal_id => self.id }) ||
-      DealData.new(:deal_id => self.id)
+    DealData.where(:deal_id => self.id).first_or_initialize
   end
 end

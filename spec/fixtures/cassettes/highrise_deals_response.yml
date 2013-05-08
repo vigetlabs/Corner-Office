@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://vigetdevs.highrisehq.com/deals.xml
+    uri: https://vigetdevs.highrisehq.com/deals.xml?status=pending
     body:
       encoding: US-ASCII
       string: ''

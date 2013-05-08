@@ -102,4 +102,108 @@ describe Deal do
       end
     end
   end
+
+  describe "#deal_data=" do
+    let(:deal){ described_class.new(:id => 1) }
+
+    context "passed a non-nil value for deal_data" do
+      it "sets @deal_data" do
+        deal.deal_data = :test
+        deal.instance_variable_get(:@deal_data).should == :test
+      end
+    end
+
+    context "passed a nil value deal_data" do
+      let(:deal_data_double){ double }
+      before { DealData.stub(:new).with({ :deal_id => 1 }){ deal_data_double } }
+
+      it "sets @deal_data equal to a new DealData instance" do
+        deal.deal_data = nil
+        deal.instance_variable_get(:@deal_data).should == deal_data_double
+      end
+    end
+  end
+
+  describe "#daily_budget" do
+    let(:deal){ described_class.new(:price => 42) }
+    let(:deal_data_double){ double }
+    before { DealData.stub(:new){ deal_data_double } }
+
+    it "sends #daily_budget to an instance of DealData with the deal price" do
+      deal_data_double.should_receive(:daily_budget).with(42)
+      deal.daily_budget
+    end
+  end
+
+  describe ".find" do
+    let(:deal_data_preloader){ double }
+    before do
+      Highrise::Deal.stub(:find){ "super_result" }
+      DealDataPreloader.stub(:new){ deal_data_preloader }
+      deal_data_preloader.stub(:preload){ true }
+    end
+
+    it "returns the result of super" do
+      described_class.find(123).should == "super_result"
+    end
+
+    it "sends .preload_deal_data with the result of super" do
+      described_class.should_receive(:preload_deal_data).with("super_result")
+      described_class.find(123)
+    end
+  end
+
+  describe ".filter" do
+    it "sends a message to the filter method" do
+      described_class.should_receive(:testing_filter).with(:test_data)
+      described_class.filter(:testing, :test_data)
+    end
+  end
+
+  describe ".missing_data_filter" do
+    let(:deal_with_all_data){ described_class.new(:id => 1, :price => 42) }
+    let(:deal_missing_date){ described_class.new(:id => 2, :price => 42) }
+    let(:deal_missing_price){ described_class.new(:id => 2, :price => nil) }
+
+    let(:deal_data_double1){ double }
+    let(:deal_data_double2){ double }
+    let(:deal_data_double3){ double }
+
+    before do
+      deal_with_all_data.stub(:deal_data){ deal_data_double1 }
+      deal_data_double1.stub(:start_date){ Date.today - 1.day }
+      deal_data_double1.stub(:end_date){ Date.today + 1.day }
+
+      deal_missing_date.stub(:deal_data){ deal_data_double2 }
+      deal_data_double2.stub(:start_date){ nil }
+      deal_data_double2.stub(:end_date){ Date.today + 1.day }
+
+      deal_missing_price.stub(:deal_data){ deal_data_double3 }
+      deal_data_double3.stub(:start_date){ Date.today - 1.day }
+      deal_data_double3.stub(:end_date){ Date.today + 1.day }
+    end
+
+    it "returns deals with missing dates and prices" do
+      deals_missing_data = described_class.send(:missing_data_filter, [deal_with_all_data, deal_missing_date, deal_missing_price])
+      deals_missing_data.should == [deal_missing_date, deal_missing_price]
+    end
+  end
+
+  describe ".preload_deal_data" do
+    let(:deal_data_preloader){ double }
+    before { deal_data_preloader.stub(:preload){ true } }
+
+    it "initializes a DealDataPreloader" do
+      DealDataPreloader.should_receive(:new).with(:deals){ deal_data_preloader }
+
+      described_class.send(:preload_deal_data, :deals)
+    end
+
+    it "sends #preload to a DealDataPreloader instance" do
+      DealDataPreloader.stub(:new){ deal_data_preloader }
+      deal_data_preloader.should_receive(:preload)
+
+      described_class.send(:preload_deal_data, :deals)
+    end
+  end
 end

@@ -9,6 +9,7 @@ end
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'capybara/poltergeist'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -33,9 +34,30 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include UserLoginController, :type => :controller
   config.include UserLoginFeature, :type => :feature
+
+  config.before(:all, :js => :true) do
+    self.use_transactional_fixtures = false
+  end
+
+  config.after(:all, :js => :true) do
+    ActiveRecord::Base.transaction do
+      ActiveRecord::Base.connection.tables.each do |t|
+        ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{t} CASCADE")
+      end
+    end
+  end
+
+  config.before(:each, :js => :true) do
+    Capybara.current_driver = :poltergeist
+  end
+
+  config.after(:each, :js => :true) do
+    Capybara.use_default_driver
+  end
 end
 
 VCR.configure do |c|
+  c.ignore_hosts '127.0.0.1', 'localhost'
   c.hook_into :webmock
   c.cassette_library_dir = 'spec/fixtures/cassettes'
 end

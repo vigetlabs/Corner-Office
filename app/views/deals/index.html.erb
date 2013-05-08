@@ -1,31 +1,7 @@
 <h2>Deals</h2>
-<%- if @deals.any? -%>
-  <table class="table tablesorter">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Budget</th>
-        <th>Win Probability</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Average Rate</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @deals.each do |d| %>
-        <tr style="background-color: hsl(<%= d.deal_data.probability %>,50%, 92%);">
-          <td><%= link_to d.name, deal_path(d) %></td>
-          <td><%= number_to_currency(d.price, :precision => 0) %></td>
-          <td><%= number_to_percentage(d.deal_data.probability, :precision => 0) %></td>
-          <td><%= d.deal_data.start_date %></td>
-          <td><%= d.deal_data.end_date %></td>
-          <td><%= number_to_currency(d.deal_data.average_rate, :precision => 0) %></td>
-          <td><%= link_to "Edit", edit_deal_path(d), :class => 'btn btn-small' %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<%- else -%>
-  <div class="alert">You don't have access to any deals.</div>
-<%- end -%>
+<%= render "table", :deals => deals, :klass => "deals" %>
+
+<%= render "chart", :chart => @chart %>
+
+<h3>Deals Missing Data</h3>
+<%= render "table", :deals => deals_missing_data, :klass => "deals-missing-data" %>

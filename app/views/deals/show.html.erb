@@ -28,3 +28,5 @@
   <strong>Average Rate:</strong>
   <%= number_to_currency(deal.average_rate, :precision => 0) %>
 </p>
+
+<%= render "chart", :chart => @chart %>

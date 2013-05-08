@@ -70,6 +70,7 @@ group :test do
   gem "launchy", :require => false
   gem "vcr"
   gem "webmock"
+  gem "poltergeist"
 end
 
 gem "nokogiri"

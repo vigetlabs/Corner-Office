@@ -1,7 +1,12 @@
 <h2>Edit your account</h2>
+
 <%= simple_form_for current_user, :url => account_path, :method => :put do |f| %>
   <%= render "form_fields", :f => f %>
   <%= f.button :submit, :value => "Submit" %>
 <% end %>
 
-<%= link_to "Link Your Highrise Account", new_token_path, :id => "authorize_highrise", :class => "btn btn-primary" %>
+<%- if current_user.token.present? -%>
+  <%= link_to "Refresh Highrise Authorization", new_token_path, :id => "authorize_highrise", :class => "btn" %>
+<%- else -%>
+  <%= link_to "Link Your Highrise Account", new_token_path, :id => "authorize_highrise", :class => "btn btn-primary" %>
+<%- end -%>

@@ -42,18 +42,4 @@ describe Visualization::DealsByMonthChart do
       ]
     end
   end
-
-  describe "#initialize" do
-    context "with a title" do
-      subject { described_class.new(:deals, params.merge(:title => "Custom Title")) }
-
-      its(:title){ should == "Custom Title" }
-    end
-
-    context "with a title" do
-      subject { described_class.new(:deals, params.merge(:legend => "none")) }
-
-      its(:legend){ should == "none" }
-    end
-  end
 end

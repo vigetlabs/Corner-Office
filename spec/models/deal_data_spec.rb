@@ -45,9 +45,9 @@ describe DealData do
         subject.stub(:end_date){ Date.current }
       end
 
-      it "does not add an error" do
+      it "adds an error" do
         subject.send :validate_start_date_before_end_date
-        subject.errors[:end_date].should_not be_present
+        subject.errors[:end_date].should be_present
       end
     end
   end

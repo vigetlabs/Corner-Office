@@ -11,10 +11,10 @@ class DealData < ActiveRecord::Base
   private
 
   def validate_start_date_before_end_date
-    errors.add(:end_date, "must be after the start date") if start_date_after_end_date? 
+    errors.add(:end_date, "must be after the start date") if invalid_date_combination?
   end
 
-  def start_date_after_end_date?
-    (start_date && end_date) && (start_date > end_date)
+  def invalid_date_combination?
+    (start_date && end_date) && (start_date >= end_date)
   end
 end

@@ -64,6 +64,7 @@ describe "a visitor" do
               context "with valid deal_data attributes" do
                 before do
                   fill_in "deal_deal_data_probability", :with => 100
+                  select "2014", :from => "deal_deal_data_end_date_1i"
                   VCR.use_cassette "highrise_deal_response", :record => :none,
                     :allow_playback_repeats => true do
                       click_button "Update Deal"

@@ -3,7 +3,6 @@ class DealsController < ApplicationController
 
   before_filter :require_authentication
   before_filter :require_oauth_token
-  before_filter :set_oauth_token
 
   def index
     @deals = Deal.find(:all)
@@ -27,13 +26,11 @@ class DealsController < ApplicationController
   private
 
   def require_oauth_token
-    unless current_user.token.present?
+    if current_user.token.present?
+      Highrise::Base.oauth_token = current_user.token.secret
+    else
       redirect_to edit_account_path, :alert => t("token.required")
     end
-  end
-
-  def set_oauth_token
-    Highrise::Base.oauth_token = current_user.token.secret
   end
 
   def deal

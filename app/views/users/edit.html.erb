@@ -1,3 +1,4 @@
+<%= link_to "View Deals", root_path %>
 <h2>Edit your account</h2>
 <%= simple_form_for current_user, :url => account_path, :method => :put do |f| %>
   <%= render "form_fields", :f => f %>

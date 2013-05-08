@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://vigetdevs.highrisehq.com/deals/2651749.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/xml
+      Authorization:
+      - Bearer access_token
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbng=
+      !binary "RGF0ZQ==":
+      - !binary |-
+        TW9uLCAwNiBNYXkgMjAxMyAyMDowNzoyOSBHTVQ=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24veG1sOyBjaGFyc2V0PXV0Zi04
+      !binary "VHJhbnNmZXItRW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "WC1UaHJvdHRsZS1Ib3Jpem9u":
+      - !binary |-
+        MjAxMy0wNS0wNlQyMDowNzozMFo=
+      !binary "WC1UaHJvdHRsZS1NYXg=":
+      - !binary |-
+        NTAw
+      !binary "WC1SZXF1ZXN0LUlk":
+      - !binary |-
+        ZmE5OGJjY2EtYTMxMi00ZGZhLTk5ZjktM2UwYTYwODBiODk2
+      !binary "TGFzdC1Nb2RpZmllZA==":
+      - !binary |-
+        TW9uLCAxOCBNYXIgMjAxMyAxOTozODoyMSBHTVQ=
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        NTI=
+      !binary "WC1UaHJvdHRsZS1Db3VudA==":
+      - !binary |-
+        MQ==
+      !binary "U3RyaWN0LVRyYW5zcG9ydC1TZWN1cml0eQ==":
+      - !binary |-
+        bWF4LWFnZT0zMTUzNjAwMA==
+      !binary "RXRhZw==":
+      - !binary |-
+        ImE4NjdkNWYzZDhjY2ZlMjcxM2QyMzdlM2U5YzBjNTQyIg==
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        cHJpdmF0ZSwgbWF4LWFnZT0wLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "Q29udGVudC1FbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        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
+        /y+NvwHVAJPHAREAAA==
+    http_version: 
+  recorded_at: Mon, 06 May 2013 20:07:29 GMT
+recorded_with: VCR 2.4.0

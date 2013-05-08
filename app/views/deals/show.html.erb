@@ -1,0 +1,30 @@
+<%= link_to "Back to Deals", root_path %>
+<h2><%= deal.name %></h2>
+<%= link_to "Edit", edit_deal_path(deal), :class => 'btn' %>
+<%= link_to "View on Highrise", url_for("#{Highrise::Base.site}deals/#{deal.id}"),
+      :target => :blank, :class => 'btn' %>
+
+<p>
+  <strong>Budget:</strong>
+  <%= number_to_currency(deal.price, :precision => 0) %>
+</p>
+
+<p>
+  <strong>Expected Start Date:</strong>
+  <%= deal.start_date %>
+</p>
+
+<p>
+  <strong>Expected End Date:</strong>
+  <%= deal.end_date %>
+</p>
+
+<p>
+  <strong>Win Probability:</strong>
+  <%= number_to_percentage(deal.probability, :precision => 0) %>
+</p>
+
+<p>
+  <strong>Average Rate:</strong>
+  <%= number_to_currency(deal.average_rate, :precision => 0) %>
+</p>

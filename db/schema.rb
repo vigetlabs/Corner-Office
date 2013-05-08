@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130503142417) do
+ActiveRecord::Schema.define(:version => 20130506184227) do
+
+  create_table "deal_data", :force => true do |t|
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "probability"
+    t.integer  "average_rate"
+    t.integer  "deal_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "deal_data", ["deal_id"], :name => "index_deal_data_on_deal_id", :unique => true
 
   create_table "tokens", :force => true do |t|
     t.string   "secret",     :limit => 400, :null => false

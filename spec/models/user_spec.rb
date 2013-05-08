@@ -27,4 +27,31 @@ describe User do
       user.name.should == "Marie Curie"
     end
   end
+
+  describe "#token" do
+    let(:user){ create(:user) }
+
+    context "when the user has one oauth token" do
+      let!(:token){ create(:token, :user => user) }
+
+      it "returns the token" do
+        user.token.should == token
+      end
+    end
+
+    context "when the user has no oauth token" do
+      it "returns nil" do
+        user.token.should be_nil
+      end
+    end
+
+    context "when the user has multiple oauth tokens" do
+      let!(:token1){ create(:token, :user => user, :created_at => Date.today) }
+      let!(:token2){ create(:token, :user => user, :created_at => Date.yesterday) }
+
+      it "returns the most recent token" do
+        user.token.should == token1
+      end
+    end
+  end
 end

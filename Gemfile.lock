@@ -95,6 +95,8 @@ GEM
     fssm (0.2.10)
     hashie (1.2.0)
     highline (1.6.18)
+    highrise (3.0.5)
+      activeresource (~> 3.0)
     hike (1.2.2)
     http_parser.rb (0.5.3)
     httpauth (0.2.0)
@@ -250,6 +252,7 @@ DEPENDENCIES
   compass-rails
   factory_girl
   factory_girl_rails
+  highrise
   jquery-rails
   launchy
   nokogiri

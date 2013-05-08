@@ -1,5 +1,11 @@
+require 'highrise'
+
 module CornerOffice
-  if Rails.env.production?
+  highrise_config_path = Rails.root.join('config','highrise.yml')
+
+  if File.file?(highrise_config_path)
+    HIGHRISE_CONFIG = YAML.load_file(highrise_config_path)[Rails.env]
+  else
     HIGHRISE_CONFIG = {
       "site"     => ENV['HIGHRISE_SITE'],
       "client_id" => ENV['HIGHRISE_CLIENT_ID'],
@@ -7,7 +13,7 @@ module CornerOffice
       "authorize_url" => ENV['HIGHRISE_AUTHORIZE_URL'],
       "token_url"     => ENV['HIGHRISE_TOKEN_URL'],
     }
-  else
-    HIGHRISE_CONFIG = YAML.load_file(Rails.root.join('config','highrise.yml'))[Rails.env]
   end
+
+  Highrise::Base.site = HIGHRISE_CONFIG['site']
 end

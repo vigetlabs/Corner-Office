@@ -1,7 +1,14 @@
 <h2>Deals</h2>
 <%= render "table", :deals => deals, :klass => "deals" %>
 
-<%= render "chart", :chart => @chart %>
+<%= render :partial => "chart",
+           :locals  => {
+              :chart         => @chart,
+              :chart_options => {
+                  :title  => "Projects by Month (Budget/Project Duration)",
+                  :legend => "right" }
+              }
+%>
 
 <h3>Deals Missing Data</h3>
 <%= render "table", :deals => deals_missing_data, :klass => "deals-missing-data" %>

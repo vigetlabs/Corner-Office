@@ -4,10 +4,8 @@ module Visualization
 
     def initialize(deals, params = {})
       @deals = deals
-      @start_date = params[:start_date] || Date.today
-      @end_date = params[:end_date] || Date.today + 3.years
-      @title = params[:title] || "Deals"
-      @legend = params[:legend] || "right"
+      @start_date = params[:start_date] || Date.today.at_beginning_of_month
+      @end_date = params[:end_date] || 3.years.from_now
     end
 
     def to_a

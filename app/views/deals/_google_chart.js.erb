@@ -1,5 +1,5 @@
 function drawVisualization() {
-  var data_table = google.visualization.arrayToDataTable(<%= raw(@chart.to_a) %>);
+  var data_table = google.visualization.arrayToDataTable(<%= raw(chart.to_a) %>);
   var wrapper = new google.visualization.ColumnChart(document.getElementById("deal-visualization"));
 
   google.visualization.events.addListener(wrapper, "ready", onReady);
@@ -7,13 +7,13 @@ function drawVisualization() {
   wrapper.draw(
     data_table,
     {
-      title:     "<%= @chart.title %>",
+      title:     "<%= chart_options[:title] %>",
       isStacked: true,
       width:     920,
       height:    500,
       hAxis:     { title: "Month" },
       vAxis:     { format: "$#,###" },
-      legend:    { position: "<%= @chart.legend %>" }
+      legend:    { position: "<%= chart_options[:legend] %>" }
     }
   );
 

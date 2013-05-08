@@ -1,5 +1,5 @@
 <div id="deal-visualization"></div>
 
 <script type="text/javascript">
-  <%= render "google_chart.js", :chart => @chart %>
+  <%= render :partial => "google_chart", :formats => [:js], :locals => { :chart => chart, :chart_options => chart_options } %>
 </script>

@@ -6,15 +6,11 @@ class DealsController < ApplicationController
 
   def index
     @chart = Visualization::DealsByMonthChart.new(deals,
-                              :start_date => Date.today.at_beginning_of_year,
-                              :end_date => 3.years.from_now,
                               :title => "Projects by Month (Budget/Project Duration)")
   end
 
   def show
     @chart = Visualization::DealsByMonthChart.new([deal],
-                              :start_date => Date.today.at_beginning_of_year,
-                              :end_date => 3.years.from_now,
                               :title => "Project Timeline",
                               :legend => "none")
   end

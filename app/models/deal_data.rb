@@ -35,6 +35,6 @@ class DealData < ActiveRecord::Base
   end
 
   def invalid_date_combination?
-    (start_date && end_date) && (start_date >= end_date)
+    dates_present? && (start_date >= end_date)
   end
 end

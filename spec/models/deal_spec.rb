@@ -184,7 +184,9 @@ describe Deal do
     end
 
     it "returns deals with missing dates and prices" do
-      deals_missing_data = described_class.send(:missing_data_filter, [deal_with_all_data, deal_missing_date, deal_missing_price])
+      deals_missing_data = described_class.send(:missing_data_filter,
+        [deal_with_all_data, deal_missing_date, deal_missing_price])
+
       deals_missing_data.should == [deal_missing_date, deal_missing_price]
     end
   end

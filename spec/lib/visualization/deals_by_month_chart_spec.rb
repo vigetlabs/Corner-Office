@@ -24,7 +24,7 @@ describe Visualization::DealsByMonthChart do
     end
 
     it "returns the correct array representation" do
-      chart.to_a.should == 
+      chart.to_a.should ==
       [
         ["Month", "Deal 1", "Deal 2"],
         ["01/2013", 0, 0],

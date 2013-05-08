@@ -5,14 +5,11 @@ class DealsController < ApplicationController
   before_filter :require_oauth_token
 
   def index
-    @chart = Visualization::DealsByMonthChart.new(deals,
-                              :title => "Projects by Month (Budget/Project Duration)")
+    @chart = Visualization::DealsByMonthChart.new(deals)
   end
 
   def show
-    @chart = Visualization::DealsByMonthChart.new([deal],
-                              :title => "Project Timeline",
-                              :legend => "none")
+    @chart = Visualization::DealsByMonthChart.new([deal])
   end
 
   def edit

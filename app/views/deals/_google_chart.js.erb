@@ -1,11 +1,11 @@
 function drawVisualization() {
-  var data_table = google.visualization.arrayToDataTable(<%= raw(chart.to_a) %>);
+  var dataTable = google.visualization.arrayToDataTable(<%= raw(chart.to_a.to_json) %>);
   var wrapper = new google.visualization.ColumnChart(document.getElementById("deal-visualization"));
 
   google.visualization.events.addListener(wrapper, "ready", onReady);
 
   wrapper.draw(
-    data_table,
+    dataTable,
     {
       title:     "<%= chart_options[:title] %>",
       isStacked: true,

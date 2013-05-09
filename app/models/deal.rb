@@ -27,7 +27,7 @@ class Deal < Highrise::Deal
   end
 
   def daily_budget
-    deal_data.daily_budget(price)
+    deal_data.daily_budget(price || 0)
   end
 
   delegate :start_date, :end_date, :date_range, :probability, :average_rate,

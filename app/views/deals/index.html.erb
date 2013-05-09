@@ -13,4 +13,4 @@
 <%- if deals_missing_data.any? -%>
   <h3>Deals Missing Data</h3>
   <%= render "table", :deals => deals_missing_data, :klass => "deals-missing-data" %>
-<%- else -%>
+<%- end -%>

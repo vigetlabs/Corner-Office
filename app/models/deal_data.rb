@@ -13,17 +13,13 @@ class DealData < ActiveRecord::Base
   end
 
   def daily_budget(price)
-    if project_duration_in_days && project_duration_in_days > 0
-      price / project_duration_in_days
-    end
+    (project_duration_in_days > 0) ? (price / project_duration_in_days) : 0
   end
 
   private
 
   def project_duration_in_days
-    if dates_present?
-      @project_duration_in_days ||= (end_date - start_date).to_i
-    end
+    @project_duration_in_days ||= dates_present? ? (end_date - start_date).to_i : 0
   end
 
   def dates_present?

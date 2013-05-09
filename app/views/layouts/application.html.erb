@@ -37,14 +37,12 @@
       </div>
     </div>
 
-    <% flash.each do |key, value| %>
-      <% if [:error, :notice, :alert].include?(key) && value.present? %>
-        <div class="alert <%= key %>">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <%= value %>
-        </div>
-      <% end %>
-    <% end %>
+    <%- flash.to_hash.values_at(:error, :notice, :alert).select(&:present?).each do |value| -%>
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= value %>
+      </div>
+    <%- end -%>
 
     <%= yield %>
 

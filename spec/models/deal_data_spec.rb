@@ -85,8 +85,8 @@ describe DealData do
     context "if a date is missing" do
       before { deal_data.start_date = nil }
 
-      it "returns nil" do
-        deal_data.daily_budget(200).should be_nil
+      it "returns 0" do
+        deal_data.daily_budget(200).should == 0
       end
     end
 
@@ -96,8 +96,8 @@ describe DealData do
         deal_data.end_date = Date.today
       end
 
-      it "returns nil" do
-        deal_data.daily_budget(200).should be_nil
+      it "returns 0" do
+        deal_data.daily_budget(200).should == 0
       end
     end
   end

@@ -41,7 +41,7 @@ module Visualization
 
     def deal_entry(deal, month)
       if deal.date_range && month.overlaps_with?(deal.date_range)
-        deal.daily_budget || 0
+        deal.daily_budget
       else
         0
       end

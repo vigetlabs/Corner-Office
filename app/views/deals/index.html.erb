@@ -1,8 +1,16 @@
 <h2>Deals</h2>
-<% if @deals.any? %>
-  <ul>
-    <% @deals.each do |deal| %>
-      <li><%= link_to deal.name, deal_path(deal) %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render "table", :deals => deals, :klass => "deals" %>
+
+<%= render :partial => "chart",
+           :locals  => {
+              :chart         => @chart,
+              :chart_options => {
+                  :title  => "Projects by Month (Budget/Project Duration)",
+                  :legend => "right" }
+              }
+%>
+
+<%- if deals_missing_data.any? -%>
+  <h3>Deals Missing Data</h3>
+  <%= render "table", :deals => deals_missing_data, :klass => "deals-missing-data" %>
+<%- end -%>

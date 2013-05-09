@@ -1,4 +1,38 @@
 require "spec_helper"
+describe "a visitor running js", :js => true do
+  let(:user){ create(:user) }
+  before do
+    create(:token, :user => user, :secret => "access_token")
+    login user
+  end
+
+  context "visiting the deals page" do
+    before do
+      DealData.create(:deal_id    => 2651749,
+                      :start_date => Date.new(2013,1,1),
+                      :end_date   => Date.new(2013,3,1))
+      VCR.use_cassette "highrise_deals_response", :record => :none do
+        visit "/"
+      end
+    end
+
+    it "sees a deals by month bar chart" do
+      page.should have_selector("#deal-visualization svg")
+    end
+
+    context "clicking to a deal page" do
+      before do
+        VCR.use_cassette "highrise_deal_response", :record => :none do
+          click_link "7-Up App"
+        end
+      end
+
+      it "sees a deal timeline bar chart" do
+        page.should have_selector("#deal-visualization svg")
+      end
+    end
+  end
+end
 
 describe "a visitor" do
   context "who has an account" do
@@ -34,13 +68,20 @@ describe "a visitor" do
 
         context "visiting the deals page" do
           before do
+            DealData.create(:deal_id    => 2651749,
+                            :start_date => Date.new(2013,1,1),
+                            :end_date   => Date.new(2013,3,1))
             VCR.use_cassette "highrise_deals_response", :record => :none do
               visit "/"
             end
           end
 
-          it "sees her deals" do
-            page.should have_link "7-Up App"
+          it "sees a list of deals" do
+            page.find(".deals").should have_link  "7-Up App"
+          end
+
+          it "sees a list of deals missing data" do
+            page.find(".deals-missing-data").should have_link "Refresh Everything Site UX"
           end
 
           context "clicking on a deal link" do

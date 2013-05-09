@@ -1,14 +1,15 @@
 class DealsController < ApplicationController
-  helper_method :deal
+  helper_method :deal, :deals, :deals_missing_data
 
   before_filter :require_authentication
   before_filter :require_oauth_token
 
   def index
-    @deals = Deal.find(:all)
+    @chart = Visualization::DealsByMonthChart.new(deals)
   end
 
   def show
+    @chart = Visualization::DealsByMonthChart.new([deal])
   end
 
   def edit
@@ -35,5 +36,17 @@ class DealsController < ApplicationController
 
   def deal
     @deal ||= Deal.find(params[:id])
+  end
+
+  def deals
+    @deals ||= Deal.with_preloaded_deal_data(all_deals) - deals_missing_data
+  end
+
+  def all_deals
+    @all_deals ||= Deal.find(:all, :params => { :status => "pending" })
+  end
+
+  def deals_missing_data
+    @deals_missing_data ||= Deal.filter(:missing_data, all_deals)
   end
 end

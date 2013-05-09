@@ -28,3 +28,12 @@
   <strong>Average Rate:</strong>
   <%= number_to_currency(deal.average_rate, :precision => 0) %>
 </p>
+
+<%= render :partial => "chart",
+           :locals  => {
+              :chart         => @chart,
+              :chart_options => {
+                  :title  => "Project Timeline",
+                  :legend => "none" }
+              }
+%>

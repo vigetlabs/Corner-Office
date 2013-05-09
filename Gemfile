@@ -18,6 +18,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'bootstrap-sass', '~> 2.3.1.0'
 end
 
 gem 'jquery-rails'
@@ -69,6 +70,7 @@ group :test do
   gem "launchy", :require => false
   gem "vcr"
   gem "webmock"
+  gem "poltergeist"
 end
 
 gem "nokogiri"

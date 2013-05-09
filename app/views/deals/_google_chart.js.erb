@@ -1,0 +1,34 @@
+function drawVisualization() {
+  var dataTable = google.visualization.arrayToDataTable(<%= raw(chart.to_a.to_json) %>);
+  var wrapper = new google.visualization.ColumnChart(document.getElementById("deal-visualization"));
+
+  google.visualization.events.addListener(wrapper, "ready", onReady);
+
+  wrapper.draw(
+    dataTable,
+    {
+      title:     "<%= chart_options[:title] %>",
+      isStacked: true,
+      width:     920,
+      height:    500,
+      hAxis:     { title: "Month" },
+      vAxis:     { format: "$#,###" },
+      legend:    { position: "<%= chart_options[:legend] %>" }
+    }
+  );
+
+  function onReady() {
+    google.visualization.events.addListener(wrapper, "onmouseover", overHandler);
+    google.visualization.events.addListener(wrapper, "onmouseout", outHandler);
+  }
+
+  function overHandler(e) {
+    wrapper.setSelection([{"row": null, "column": e.column}]);
+  }
+
+  function outHandler(e) {
+    wrapper.setSelection([{"row": null, "column": null}]);
+  }
+}
+
+google.setOnLoadCallback(drawVisualization);

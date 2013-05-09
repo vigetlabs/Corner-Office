@@ -51,4 +51,54 @@ describe DealData do
       end
     end
   end
+
+  describe "#date_range" do
+    let(:deal_data){ described_class.new }
+
+    context "if start and end dates are present" do
+      before do
+        deal_data.start_date = 1
+        deal_data.end_date = 2
+      end
+
+      it "returns a range of the date values" do
+        deal_data.date_range.should == (1..2)
+      end
+    end
+
+    context "if a date is missing" do
+      it "returns nil" do
+        deal_data.date_range.should be_nil
+      end
+    end
+  end
+
+  describe "#daily_budget" do
+    let(:start_date){ Date.today - 1.day }
+    let(:end_date){ Date.today + 1.day }
+    let(:deal_data){ described_class.new(:start_date => start_date, :end_date => end_date) }
+
+    it "returns the price divided by the number of days between start and end dates" do
+      deal_data.daily_budget(200).should == 100
+    end
+
+    context "if a date is missing" do
+      before { deal_data.start_date = nil }
+
+      it "returns 0" do
+        deal_data.daily_budget(200).should == 0
+      end
+    end
+
+    context "if there are zero days between the start and end dates" do
+      before do
+        deal_data.start_date = Date.today
+        deal_data.end_date = Date.today
+      end
+
+      it "returns 0" do
+        deal_data.daily_budget(200).should == 0
+      end
+    end
+  end
 end

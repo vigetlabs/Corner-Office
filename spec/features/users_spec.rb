@@ -85,7 +85,7 @@ describe "a visitor" do
       before { login user }
 
       context "logging out" do
-        before { click_link "Log Out" }
+        before { click_link "Logout" }
 
         it "is redirected to the login page and sees a logout message" do
           current_path.should == login_path

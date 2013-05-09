@@ -25,3 +25,9 @@ en:
     update:
       success: "Deal updated"
       error: "There were errors updating the deal"
+  password:
+    create:
+      success: "Password reset instructions have been sent"
+      error: "No user could be found with the provided email address"
+    edit:
+      error: "Invalid reset token"

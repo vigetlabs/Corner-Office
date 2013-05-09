@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include SimplestAuth::Model
+  include PasswordResettable
 
   authenticate_by :email
 

@@ -71,6 +71,7 @@ group :test do
   gem "vcr"
   gem "webmock"
   gem "poltergeist"
+  gem "email_spec"
 end
 
 gem "nokogiri"

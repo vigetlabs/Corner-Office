@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130506184227) do
+ActiveRecord::Schema.define(:version => 20130509130818) do
 
   create_table "deal_data", :force => true do |t|
     t.date     "start_date"
@@ -37,10 +37,12 @@ ActiveRecord::Schema.define(:version => 20130506184227) do
     t.string   "last_name"
     t.string   "email"
     t.string   "crypted_password"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "password_reset_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["password_reset_token"], :name => "index_users_on_password_reset_token", :unique => true
 
 end

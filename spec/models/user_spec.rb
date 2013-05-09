@@ -8,6 +8,7 @@ describe User do
     it { should validate_presence_of(:password) }
 
     it { should validate_uniqueness_of(:email) }
+    it { should validate_uniqueness_of(:password_reset_token) }
 
     it { should allow_value("test@test.com").for(:email) }
     it { should_not allow_value("test.com").for(:email) }
@@ -52,6 +53,25 @@ describe User do
       it "returns the most recent token" do
         user.token.should == token1
       end
+    end
+  end
+
+  describe "#send_password_reset_instructions" do
+    let(:user){ create(:user) }
+    let(:mailer){ double }
+    before do
+      PasswordResetMailer.stub(:send_reset_instructions){ mailer }
+      mailer.stub(:deliver){ nil }
+    end
+
+    it "sets a password reset token" do
+      user.send_password_reset_instructions
+      user.password_reset_token.should_not be_blank
+    end
+
+    it "sends a password reset email" do
+      mailer.should_receive(:deliver)
+      user.send_password_reset_instructions
     end
   end
 end

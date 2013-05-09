@@ -66,4 +66,6 @@ CornerOffice::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   default_url_options[:host] = "corner-office.herokuapp.com"
+
+  ActionMailer::Base.default :from => 'corner-office@viget-spots-you.herokuapp.com'
 end

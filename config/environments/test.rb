@@ -36,4 +36,6 @@ CornerOffice::Application.configure do
   config.active_support.deprecation = :stderr
 
   default_url_options[:host] = "localhost:3000"
+
+  ActionMailer::Base.default :from => 'dont-you-dare-reply@localhost'
 end

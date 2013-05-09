@@ -36,4 +36,8 @@ CornerOffice::Application.configure do
   config.assets.debug = true
 
   default_url_options[:host] = "corner-office.dev"
+
+  config.action_mailer.delivery_method = :test
+
+  ActionMailer::Base.default :from => 'dont-you-dare-reply@localhost'
 end

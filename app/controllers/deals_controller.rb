@@ -39,7 +39,7 @@ class DealsController < ApplicationController
   end
 
   def deals
-    @deals ||= all_deals - deals_missing_data
+    @deals ||= Deal.with_preloaded_deal_data(all_deals) - deals_missing_data
   end
 
   def all_deals

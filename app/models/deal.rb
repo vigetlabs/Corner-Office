@@ -1,11 +1,9 @@
 class Deal < Highrise::Deal
   include ReadOnlyResource
 
-  # ActiveResource doesn't include callbacks so this serves the same
-  # purpose to preload the DealData associations after the find.
-  def self.find(*arguments)
-    super.tap do |find_result|
-      preload_deal_data(find_result)
+  def self.with_preloaded_deal_data(deals)
+    deals.tap do |deals|
+      DealDataPreloader.new(deals).preload
     end
   end
 
@@ -43,10 +41,6 @@ class Deal < Highrise::Deal
         end
       end
     end
-  end
-
-  def self.preload_deal_data(deals)
-    DealDataPreloader.new(deals).preload
   end
 
   def find_or_build_deal_data

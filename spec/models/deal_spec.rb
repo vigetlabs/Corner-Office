@@ -135,21 +135,29 @@ describe Deal do
     end
   end
 
-  describe ".find" do
+  describe ".with_preloaded_deal_data" do
     let(:deal_data_preloader){ double }
     before do
-      Highrise::Deal.stub(:find){ "super_result" }
+      Highrise::Deal.stub(:with_preloaded_deal_data){ "super_result" }
       DealDataPreloader.stub(:new){ deal_data_preloader }
       deal_data_preloader.stub(:preload){ true }
     end
 
-    it "returns the result of super" do
-      described_class.find(123).should == "super_result"
+    it "returns the passed array" do
+      described_class.with_preloaded_deal_data([1,2,3]).should == [1,2,3]
     end
 
-    it "sends .preload_deal_data with the result of super" do
-      described_class.should_receive(:preload_deal_data).with("super_result")
-      described_class.find(123)
+    it "initializes a DealDataPreloader" do
+      DealDataPreloader.should_receive(:new).with(:deals){ deal_data_preloader }
+
+      described_class.with_preloaded_deal_data(:deals)
+    end
+
+    it "sends #preload to a DealDataPreloader instance" do
+      DealDataPreloader.stub(:new){ deal_data_preloader }
+      deal_data_preloader.should_receive(:preload)
+
+      described_class.with_preloaded_deal_data(:deals)
     end
   end
 
@@ -188,24 +196,6 @@ describe Deal do
         [deal_with_all_data, deal_missing_date, deal_missing_price])
 
       deals_missing_data.should == [deal_missing_date, deal_missing_price]
-    end
-  end
-
-  describe ".preload_deal_data" do
-    let(:deal_data_preloader){ double }
-    before { deal_data_preloader.stub(:preload){ true } }
-
-    it "initializes a DealDataPreloader" do
-      DealDataPreloader.should_receive(:new).with(:deals){ deal_data_preloader }
-
-      described_class.send(:preload_deal_data, :deals)
-    end
-
-    it "sends #preload to a DealDataPreloader instance" do
-      DealDataPreloader.stub(:new){ deal_data_preloader }
-      deal_data_preloader.should_receive(:preload)
-
-      described_class.send(:preload_deal_data, :deals)
     end
   end
 end

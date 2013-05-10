@@ -33,8 +33,12 @@ describe TokensController do
     end
 
     context "with an active session" do
-      let(:user){ create(:user) }
-      before { login user }
+      let(:user){ create(:user, :site => nil) }
+      before do
+        VCR.use_cassette "highrise_authorization", :record => :none do
+          login user
+        end
+      end
 
       context "including a valid authorization code" do
         let(:valid_auth_code){ "valid_auth_code" }
@@ -51,6 +55,14 @@ describe TokensController do
           end
 
           response.should redirect_to edit_account_path
+        end
+
+        it "sets a default site for the highrise user" do
+          VCR.use_cassette "highrise_token_response_with_valid_auth_code", :record => :none do
+            get :create, :code => valid_auth_code
+          end
+
+          user.site.should == "https://vigetsales.highrisehq.com"
         end
       end
 
@@ -69,6 +81,14 @@ describe TokensController do
           end
 
           response.should redirect_to edit_account_path
+        end
+
+        it "does not set a default site for the user" do
+          VCR.use_cassette "highrise_token_response_with_invalid_auth_code", :record => :none do
+            get :create, :code => invalid_auth_code
+          end
+
+          user.site.should be_nil
         end
       end
 

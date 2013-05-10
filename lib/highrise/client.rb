@@ -9,7 +9,7 @@ module Highrise
         {
           :authorize_url => CornerOffice::HIGHRISE_CONFIG["authorize_url"],
           :token_url     => CornerOffice::HIGHRISE_CONFIG["token_url"],
-          :site          => 'https://launchpad.37signals.com/'
+          :site          => CornerOffice::HIGHRISE_CONFIG["site"]
         }
       )
     end

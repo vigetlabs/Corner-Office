@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :tokens, :order => "created_at DESC"
 
-  attr_accessible :password, :password_confirmation, :email, :first_name, :last_name
+  attr_accessible :password, :password_confirmation, :email, :first_name, :last_name, :site
 
   validates :first_name, :last_name, :email, :presence => true
   validates :email, :email => true, :uniqueness => true
@@ -22,5 +22,32 @@ class User < ActiveRecord::Base
 
   def token
     tokens.first
+  end
+
+  def highrise_sites
+    @highrise_sites ||= authorization.highrise_sites if authorization
+  end
+
+  def unauthorized_token?
+    token && !authorization
+  end
+
+  def set_default_site
+    if highrise_sites && highrise_sites.count == 1
+      update_attributes(:site => highrise_sites.first[1])
+    end
+  end
+
+  private
+
+  def authorization
+    @authorization ||= get_authorization
+  end
+
+  def get_authorization
+    if token.present?
+      Highrise::Base.oauth_token = token.secret
+      Highrise::Authorization.retrieve
+    end
   end
 end

@@ -7,5 +7,6 @@ FactoryGirl.define do
     email
     password "a-secure-password"
     password_confirmation "a-secure-password"
+    site "https://vigetdevs.highrisehq.com/"
   end
 end

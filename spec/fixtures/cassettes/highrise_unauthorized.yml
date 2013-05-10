@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://launchpad.37signals.com/authorization.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/xml
+      Authorization:
+      - Bearer blah
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Server:
+      - ngx_openresty
+      Date:
+      - Mon, 13 May 2013 18:38:28 GMT
+      Content-Type:
+      - application/xml; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Status:
+      - 401 Unauthorized
+      Www-Authenticate:
+      - Bearer realm="37signals ID", user-uri="https://launchpad.37signals.com/authorization/new",
+        token-uri="https://launchpad.37signals.com/authorization/token"
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Runtime:
+      - '0.004051'
+      Set-Cookie:
+      - _launchpad_session=BAh7ByITYXV0aGVudGljYXRpb257BzoQaWRlbnRpdHlfaWQwOg12ZXJpZmllZFQiD3Nlc3Npb25faWQiJTRlMDVkMDkxZmIzZGY0Nzc1NGJhNTJkYmY4ZjZjMmMz--90555bcf6b75e7dbb3f579536c162cb8659b4adf;
+        path=/; HttpOnly
+      Cache-Control:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+    body:
+      encoding: US-ASCII
+      string: ! "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<error>\n  <message>OAuth
+        token could not be verified. The internal checksum failed, so the token data
+        was somehow mangled or tampered with.</message>\n</error>\n"
+    http_version:
+  recorded_at: Mon, 13 May 2013 18:38:28 GMT
+recorded_with: VCR 2.4.0

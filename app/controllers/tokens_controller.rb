@@ -8,6 +8,7 @@ class TokensController < ApplicationController
 
   def create
     if new_token_from_auth_code.save
+      current_user.set_default_site
       redirect_to edit_account_path, :notice => t("token.create.success")
     else
       redirect_with_error_message

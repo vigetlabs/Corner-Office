@@ -3,6 +3,7 @@ class DealsController < ApplicationController
 
   before_filter :require_authentication
   before_filter :require_oauth_token
+  before_filter :require_highrise_site
 
   def index
     @chart = Visualization::DealsByMonthChart.new(deals)
@@ -31,6 +32,14 @@ class DealsController < ApplicationController
       Highrise::Base.oauth_token = current_user.token.secret
     else
       redirect_to edit_account_path, :alert => t("token.required")
+    end
+  end
+
+  def require_highrise_site
+    if current_user.site.present?
+      Highrise::Base.site = current_user.site
+    else
+      redirect_to edit_account_path, :alert => t("highrise.site.required")
     end
   end
 

@@ -61,6 +61,8 @@ group :development do
   gem "rails-dev-tweaks"
   gem "quiet_assets"
   gem "viget-deployment", :git => "git@github.com:vigetlabs/viget-deployment.git", :require => false
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 group :test do

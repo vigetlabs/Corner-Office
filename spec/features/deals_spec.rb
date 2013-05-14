@@ -6,7 +6,7 @@ describe "a visitor running js", :js => true do
     create(:token, :user => user, :secret => "access_token")
     Token.set_callback(:create, :after, :set_default_site_for_user)
 
-    VCR.use_cassette "highrise_authorization", :record => :none do
+    VCR.use_cassette "highrise_authorization" do
       login user
     end
   end
@@ -16,7 +16,7 @@ describe "a visitor running js", :js => true do
       DealData.create(:deal_id    => 2651749,
                       :start_date => Date.new(2013,1,1),
                       :end_date   => Date.new(2013,3,1))
-      VCR.use_cassette "highrise_deals_response", :record => :none do
+      VCR.use_cassette "highrise_deals_response" do
         visit "/"
       end
     end
@@ -27,7 +27,7 @@ describe "a visitor running js", :js => true do
 
     context "clicking to a deal page" do
       before do
-        VCR.use_cassette "highrise_deal_response", :record => :none do
+        VCR.use_cassette "highrise_deal_response" do
           click_link "7-Up App"
         end
       end
@@ -78,7 +78,7 @@ describe "a visitor" do
         context "who does not have a Highrise site set" do
           context "visiting the deals page" do
             before do
-              VCR.use_cassette "highrise_authorization", :record => :none do
+              VCR.use_cassette "highrise_authorization" do
                 visit "/"
               end
             end
@@ -98,7 +98,7 @@ describe "a visitor" do
               DealData.create(:deal_id    => 2651749,
                               :start_date => Date.new(2013,1,1),
                               :end_date   => Date.new(2013,3,1))
-              VCR.use_cassette "highrise_deals_response", :record => :none do
+              VCR.use_cassette "highrise_deals_response" do
                 visit "/"
               end
             end
@@ -113,7 +113,7 @@ describe "a visitor" do
 
             context "clicking on a deal link" do
               before do
-                VCR.use_cassette "highrise_deal_response", :record => :none do
+                VCR.use_cassette "highrise_deal_response" do
                   click_link "7-Up App"
                 end
               end
@@ -124,7 +124,7 @@ describe "a visitor" do
 
               context "editing deal metadata" do
                 before do
-                  VCR.use_cassette "highrise_deal_response", :record => :none do
+                  VCR.use_cassette "highrise_deal_response" do
                     click_link "Edit"
                   end
                 end
@@ -133,9 +133,8 @@ describe "a visitor" do
                   before do
                     fill_in "deal_deal_data_probability", :with => 100
                     select "2014", :from => "deal_deal_data_end_date_1i"
-                    VCR.use_cassette "highrise_deal_response", :record => :none,
-                      :allow_playback_repeats => true do
-                        click_button "Update Deal"
+                    VCR.use_cassette "highrise_deal_response", :allow_playback_repeats => true do
+                      click_button "Update Deal"
                     end
                   end
 
@@ -152,9 +151,8 @@ describe "a visitor" do
                 context "with invalid deal_data attributes" do
                   before do
                     fill_in "deal_deal_data_probability", :with => 150
-                    VCR.use_cassette "highrise_deal_response", :record => :none,
-                      :allow_playback_repeats => true do
-                        click_button "Update Deal"
+                    VCR.use_cassette "highrise_deal_response", :allow_playback_repeats => true do
+                      click_button "Update Deal"
                     end
                   end
 

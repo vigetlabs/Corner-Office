@@ -15,5 +15,5 @@ module CornerOffice
     }
   end
 
-  ActiveResource::Base.site = CornerOffice::HIGHRISE_CONFIG["site"]
+  ActiveResource::Base.site = HIGHRISE_CONFIG["site"]
 end

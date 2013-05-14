@@ -1,15 +1,14 @@
 module Highrise
   class Authorization < Highrise::Base
+    self.site = CornerOffice::HIGHRISE_CONFIG["site"]
+
     def self.retrieve
-      self.site = CornerOffice::HIGHRISE_CONFIG["site"]
       find(:one, :from => '/authorization.xml')
     rescue ActiveResource::UnauthorizedAccess
       nil
     end
 
     def highrise_sites
-      highrise_accounts = product_accounts(:highrise)
-
       if highrise_accounts
         highrise_accounts.inject({}) do |hash, account|
           hash[account.name] = account.href
@@ -22,6 +21,10 @@ module Highrise
 
     def launchpad_accounts
       accounts.account if accounts
+    end
+
+    def highrise_accounts
+      @highrise_accounts ||= product_accounts(:highrise)
     end
 
     def product_accounts(product)

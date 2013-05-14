@@ -36,7 +36,7 @@ class DealsController < ApplicationController
   end
 
   def require_highrise_site
-    if current_user.site.present?
+    if current_user.site?
       Highrise::Base.site = current_user.site
     else
       redirect_to edit_account_path, :alert => t("highrise.site.required")

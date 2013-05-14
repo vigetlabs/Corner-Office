@@ -35,7 +35,7 @@ describe TokensController do
     context "with an active session" do
       let(:user){ create(:user, :site => nil) }
       before do
-        VCR.use_cassette "highrise_authorization", :record => :none do
+        VCR.use_cassette "highrise_authorization" do
           login user
         end
       end
@@ -44,13 +44,13 @@ describe TokensController do
         let(:valid_auth_code){ "valid_auth_code" }
 
         it "creates a token" do
-          VCR.use_cassette "highrise_token_response_with_valid_auth_code", :record => :none do
+          VCR.use_cassette "highrise_token_response_with_valid_auth_code" do
             expect{ get :create, :code => valid_auth_code }.to change{ Token.count }.by(1)
           end
         end
 
         it "redirects to the edit account page" do
-          VCR.use_cassette "highrise_token_response_with_valid_auth_code", :record => :none do
+          VCR.use_cassette "highrise_token_response_with_valid_auth_code" do
             get :create, :code => valid_auth_code
           end
 
@@ -58,7 +58,7 @@ describe TokensController do
         end
 
         it "sets a default site for the highrise user" do
-          VCR.use_cassette "highrise_token_response_with_valid_auth_code", :record => :none do
+          VCR.use_cassette "highrise_token_response_with_valid_auth_code" do
             get :create, :code => valid_auth_code
           end
 
@@ -70,13 +70,13 @@ describe TokensController do
         let(:invalid_auth_code){ "invalid_auth_code" }
 
         it "does not create a token" do
-          VCR.use_cassette "highrise_token_response_with_invalid_auth_code", :record => :none do
+          VCR.use_cassette "highrise_token_response_with_invalid_auth_code" do
             expect{ get :create, :code => invalid_auth_code }.to_not change{ Token.count }
           end
         end
 
         it "redirects to the edit account page" do
-          VCR.use_cassette "highrise_token_response_with_invalid_auth_code", :record => :none do
+          VCR.use_cassette "highrise_token_response_with_invalid_auth_code" do
             get :create
           end
 
@@ -84,7 +84,7 @@ describe TokensController do
         end
 
         it "does not set a default site for the user" do
-          VCR.use_cassette "highrise_token_response_with_invalid_auth_code", :record => :none do
+          VCR.use_cassette "highrise_token_response_with_invalid_auth_code" do
             get :create, :code => invalid_auth_code
           end
 

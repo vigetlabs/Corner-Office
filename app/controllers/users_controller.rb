@@ -34,8 +34,6 @@ class UsersController < ApplicationController
   private
 
   def highrise_sites
-    if current_user
-      @highrise_sites ||= current_user.highrise_sites
-    end
+    @highrise_sites ||= current_user.try(:highrise_sites)
   end
 end

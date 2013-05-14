@@ -62,7 +62,7 @@ describe TokensController do
             get :create, :code => valid_auth_code
           end
 
-          user.site.should == "https://vigetsales.highrisehq.com"
+          user.reload.site.should == "https://vigetsales.highrisehq.com"
         end
       end
 

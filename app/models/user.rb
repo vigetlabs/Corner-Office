@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   authenticate_by :email
 
-  has_many :tokens, :order => "created_at DESC"
+  has_many :tokens, :order => "created_at DESC", :after_add => :set_default_site
 
   attr_accessible :password, :password_confirmation, :email, :first_name, :last_name, :site
 

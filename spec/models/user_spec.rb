@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe User do
+  before(:all) { Token.skip_callback(:create, :after, :set_default_site_for_user) }
+  after(:all) { Token.set_callback(:create, :after, :set_default_site_for_user) }
+
   describe "validations" do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }

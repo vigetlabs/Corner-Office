@@ -2,7 +2,9 @@ require "spec_helper"
 describe "a visitor running js", :js => true do
   let(:user){ create(:user) }
   before do
+    Token.skip_callback(:create, :after, :set_default_site_for_user)
     create(:token, :user => user, :secret => "access_token")
+    Token.set_callback(:create, :after, :set_default_site_for_user)
 
     VCR.use_cassette "highrise_authorization", :record => :none do
       login user
@@ -67,7 +69,11 @@ describe "a visitor" do
       end
 
       context "who has an oauth token" do
-        before { create(:token, :user => user, :secret => "access_token") }
+        before do
+          Token.skip_callback(:create, :after, :set_default_site_for_user)
+          create(:token, :user => user, :secret => "access_token")
+          Token.set_callback(:create, :after, :set_default_site_for_user)
+        end
 
         context "who does not have a Highrise site set" do
           context "visiting the deals page" do

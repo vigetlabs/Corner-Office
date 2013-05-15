@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_filter :require_authentication, :only => [:edit, :update]
 
+  helper_method :highrise_sites
+
   def new
     @user = User.new
   end
@@ -27,5 +29,11 @@ class UsersController < ApplicationController
       flash.now[:error] = t("user.update.error")
       render "edit"
     end
+  end
+
+  private
+
+  def highrise_sites
+    @highrise_sites ||= current_user.try(:highrise_sites)
   end
 end

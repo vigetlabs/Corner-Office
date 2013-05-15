@@ -7,6 +7,7 @@ describe Highrise::Client do
       CornerOffice::HIGHRISE_CONFIG.stub(:[]).with("client_secret"){ "client_secret" }
       CornerOffice::HIGHRISE_CONFIG.stub(:[]).with("authorize_url"){ "authorize_url" }
       CornerOffice::HIGHRISE_CONFIG.stub(:[]).with("token_url"){ "token_url" }
+      CornerOffice::HIGHRISE_CONFIG.stub(:[]).with("site"){ "site" }
     end
 
     it "creates an object that is a kind of OAuth2 client" do
@@ -30,7 +31,7 @@ describe Highrise::Client do
     end
 
     it "creates an instance with the proper site" do
-      described_class.new.site.should == "https://launchpad.37signals.com/"
+      described_class.new.site.should == "site"
     end
   end
 end

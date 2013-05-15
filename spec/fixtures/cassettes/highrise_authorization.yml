@@ -5,7 +5,7 @@ http_interactions:
     uri: https://launchpad.37signals.com/authorization/token
     body:
       encoding: US-ASCII
-      string: grant_type=authorization_code&code=valid_auth_code&client_id=client_id&client_secret=client_secret&type=web_server&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauthorize
+      string: grant_type=authorization_code&code=d4880c44&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&type=web_server&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauthorize
     headers:
       User-Agent:
       - Faraday v0.8.7
@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - ngx_openresty
       Date:
-      - Fri, 03 May 2013 16:04:34 GMT
+      - Mon, 13 May 2013 15:34:56 GMT
       Content-Type:
       - application/json; charset=utf-8
       Transfer-Encoding:
@@ -31,15 +31,15 @@ http_interactions:
       Status:
       - 200 OK
       Etag:
-      - ! '"8cf19bd1426dd31a21446728e8d2e42c"'
+      - ! '"f35153372678675b2211eb019604cb33"'
       X-Ua-Compatible:
       - IE=Edge,chrome=1
       X-Frame-Options:
       - SAMEORIGIN
       X-Runtime:
-      - '0.009892'
+      - '0.011331'
       Set-Cookie:
-      - _launchpad_session=abc123;
+      - _launchpad_session=BAh7ByIPc2Vzc2lvbl9pZCIlNDM2NDY2MGJjZTIxMjcxNzBiMDJjZTVkMzg1NDI2NWY6E2F1dGhlbnRpY2F0aW9uewc6EGlkZW50aXR5X2lkMDoNdmVyaWZpZWRU--d63f5408e34d1b3243c63cd517f280c9d66f765e;
         path=/; HttpOnly
       Cache-Control:
       - no-store
@@ -47,9 +47,9 @@ http_interactions:
       - max-age=31536000
     body:
       encoding: US-ASCII
-      string: ! '{"access_token":"access_token","refresh_token":"refresh_token","expires_in":1209600}'
+      string: ! '{"refresh_token":"refresh_token","access_token":"access_token","expires_in":1209600}'
     http_version: 
-  recorded_at: Fri, 03 May 2013 16:04:34 GMT
+  recorded_at: Mon, 13 May 2013 15:34:56 GMT
 - request:
     method: get
     uri: https://launchpad.37signals.com/authorization.xml

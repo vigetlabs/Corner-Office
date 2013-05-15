@@ -31,3 +31,6 @@ en:
       error: "No user could be found with the provided email address"
     edit:
       error: "Invalid reset token"
+  highrise:
+    site:
+      required: "Please select a Highrise site"

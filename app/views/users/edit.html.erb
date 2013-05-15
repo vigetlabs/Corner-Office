@@ -1,12 +1,18 @@
 <h2>Edit your account</h2>
 
-<%= simple_form_for current_user, :url => account_path, :method => :put do |f| %>
-  <%= render "form_fields", :f => f %>
-  <%= f.button :submit, :value => "Submit" %>
-<% end %>
+<%- if current_user.unauthorized_token? -%>
+  <div class="alert alert-error">Your Highrise authorization has expired. Please relink your account.</div>
+<%- end -%>
 
-<%- if current_user.token.present? -%>
+<%- if current_user.unauthorized_token? -%>
+  <%= link_to "Relink Your Highrise Account", new_token_path, :id => "authorize_highrise", :class => "btn btn-primary" %>
+<%- elsif current_user.token.present? -%>
   <%= link_to "Refresh Highrise Authorization", new_token_path, :id => "authorize_highrise", :class => "btn" %>
 <%- else -%>
   <%= link_to "Link Your Highrise Account", new_token_path, :id => "authorize_highrise", :class => "btn btn-primary" %>
 <%- end -%>
+
+<%= simple_form_for current_user, :url => account_path, :method => :put do |f| %>
+  <%= render "form_fields", :f => f %>
+  <%= f.button :submit, :value => "Submit" %>
+<% end %>

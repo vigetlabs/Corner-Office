@@ -10,20 +10,20 @@ describe Token do
     it { should belong_to(:user) }
   end
 
-  describe ".new_from_auth_code" do
+  describe ".create_from_auth_code" do
     let(:highrise_token){ double }
     before do
       Highrise::Token.stub(:new).with("auth_code"){ highrise_token }
       highrise_token.stub(:to_s){ "token_string" }
     end
 
-    it "sends #new with a token string" do
-      described_class.should_receive(:new).with({ :secret => "token_string" })
-      described_class.new_from_auth_code("auth_code")
+    it "sends #create with a token string" do
+      described_class.should_receive(:create).with({ :secret => "token_string" })
+      described_class.create_from_auth_code("auth_code")
     end
 
     it "returns an instance of Token" do
-      described_class.new_from_auth_code("auth_code").should be_a(Token)
+      described_class.create_from_auth_code("auth_code").should be_a(Token)
     end
 
     context "if an oauth error occurs" do
@@ -36,7 +36,7 @@ describe Token do
       end
 
       it "returns a token with a blank secret" do
-        described_class.new_from_auth_code("auth_code").secret.should be_blank
+        described_class.create_from_auth_code("auth_code").secret.should be_blank
       end
     end
   end

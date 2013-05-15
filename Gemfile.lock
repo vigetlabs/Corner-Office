@@ -46,6 +46,11 @@ GEM
     arel (3.0.2)
     awesome_print (1.1.0)
     bcrypt-ruby (3.0.1)
+    better_errors (0.8.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.1.0)
       sass (~> 3.2)
     builder (3.0.4)
@@ -80,6 +85,7 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     crack (0.3.2)
+    debug_inspector (0.0.2)
     diff-lcs (1.2.4)
     email_spec (1.4.0)
       launchy (~> 2.1)
@@ -256,6 +262,8 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   awesome_print
+  better_errors
+  binding_of_caller
   bootstrap-sass (~> 2.3.1.0)
   capistrano
   capistrano-ext
